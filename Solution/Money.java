@@ -5,13 +5,11 @@ import Solution.Bank.Currency;
 public class Money {
 
     private double amount;
-    // private Map<Currency, Double> exchangeRates;
     public Currency currency;
 
     public Money(double amount, Currency currency) {
         this.amount = amount;
         this.currency = currency;
-        // this.exchangeRates = exchangeRates;
     }
 
     // Getter and Setter methods for amount and currency
@@ -30,18 +28,6 @@ public class Money {
     public void setCurrency(Currency currency) {
         this.currency = currency;
     }
-
-    // public void setExchangeRate(Currency currency, double rate) {
-    // exchangeRates.put(currency, rate);
-    // }
-
-    // public double getRate(Currency currency) {
-    // return exchangeRates.get(currency);
-    // }
-
-    // public Map<Currency, Double> getRates() {
-    // return exchangeRates;
-    // }
 
     // Method to convert the amount to a different currency
     public double convertToCurrency(Currency targetCurrency) {
