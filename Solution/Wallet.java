@@ -12,6 +12,12 @@ public class Wallet {
         moneyMap = new HashMap<>();
     }
 
+    public void addAll(Money[] money) {
+        for (Money e : money) {
+            addMoney(e);
+        }
+    }
+
     public void addCurrency(Currency currency, double amount) {
         addMoney(new Money(amount, currency));
     }

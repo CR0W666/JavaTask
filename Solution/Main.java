@@ -10,9 +10,7 @@ public class Main {
         Money usd = new Money(50, Currency.USD);
 
         Wallet wallet = new Wallet();
-        wallet.addMoney(czk);
-        wallet.addMoney(eur);
-        wallet.addMoney(usd);
+        wallet.addAll(new Money[] { czk, eur, usd });
 
         Money totalInCZK = wallet.getTotalInCurrency(Currency.CZK);
         Money totalInEUR = wallet.getTotalInCurrency(Currency.EUR);
