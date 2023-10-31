@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class Bank {
 
-    public enum Currency {
+    public static enum Currency {
         CZK, USD, EUR
     };
 
