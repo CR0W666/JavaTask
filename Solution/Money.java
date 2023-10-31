@@ -1,23 +1,24 @@
 package Solution;
 
 import Solution.Bank.Currency;
+import java.math.BigDecimal;
 
 public class Money {
 
-    private double amount;
+    private BigDecimal amount;
     public Currency currency;
 
-    public Money(double amount, Currency currency) {
+    public Money(BigDecimal amount, Currency currency) {
         this.amount = amount;
         this.currency = currency;
     }
 
     // Getter and Setter methods for amount and currency
-    public double getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 
@@ -30,21 +31,21 @@ public class Money {
     }
 
     // Method to convert the amount to a different currency
-    public double convertToCurrency(Currency targetCurrency) {
+    public Money convertToCurrency(Currency targetCurrency) {
         if (currency.equals(targetCurrency)) {
-            return amount; // Same currency, no conversion needed
+            return this; // Same currency, no conversion needed
         }
 
-        double sourceToTargetRate = Bank.getRateOf(currency).get(targetCurrency);
-        return amount * sourceToTargetRate;
+        BigDecimal sourceToTargetRate = Bank.getRateOf(currency).get(targetCurrency);
+        return new Money(amount.multiply(sourceToTargetRate), targetCurrency);
     }
 
     public int compareAmount(Money other) {
         if (this.currency.equals(other.currency)) {
-            return Double.compare(this.amount, other.amount);
+            return this.amount.compareTo(other.amount);
         } else {
-            return Double.compare(this.amount, other.convertToCurrency(this.currency));
+            BigDecimal convertedAmount = this.convertToCurrency(other.currency).getAmount();
+            return convertedAmount.compareTo(other.amount);
         }
     }
-
 }

@@ -1,5 +1,6 @@
 package Solution;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,7 +19,7 @@ public class Wallet {
         }
     }
 
-    public void addCurrency(Currency currency, double amount) {
+    public void addCurrency(Currency currency, BigDecimal amount) {
         addMoney(new Money(amount, currency));
     }
 
@@ -35,7 +36,7 @@ public class Wallet {
         }
     }
 
-    public void spendCurrency(Currency currency, double amount) {
+    public void spendCurrency(Currency currency, BigDecimal amount) {
         spendMoney(new Money(amount, currency));
     }
 
@@ -47,7 +48,7 @@ public class Wallet {
             Money existingMoney = moneyMap.get(moneyCurrency);
             Money newValue = Operation.subtract(existingMoney, newMoney);
 
-            if (newValue.getAmount() > 0) {
+            if (newValue.getAmount().compareTo(BigDecimal.ZERO) > 0) {
                 moneyMap.replace(moneyCurrency, newValue);
             } else {
                 System.out.println("Insufficient funds in " + moneyCurrency);
@@ -58,11 +59,11 @@ public class Wallet {
     }
 
     public Money getTotalInCurrency(Currency currency) {
-        double total = 0;
+        Money total = new Money(BigDecimal.valueOf(0), currency);
         for (Money money : moneyMap.values()) {
-            total += money.convertToCurrency(currency);
+            total = Operation.add(total, money.convertToCurrency(currency));
         }
-        return new Money(total, currency);
+        return total;
     }
 
 }

@@ -1,13 +1,15 @@
 package Solution;
 
+import java.math.BigDecimal;
+
 import Solution.Bank.Currency;
 
 public class Main {
     public static void main(String args[]) {
 
-        Money czk = new Money(2000, Currency.CZK);
-        Money eur = new Money(100, Currency.EUR);
-        Money usd = new Money(50, Currency.USD);
+        Money czk = new Money(BigDecimal.valueOf(2000), Currency.CZK);
+        Money eur = new Money(BigDecimal.valueOf(100), Currency.EUR);
+        Money usd = new Money(BigDecimal.valueOf(50), Currency.USD);
 
         Wallet wallet = new Wallet();
         wallet.addAll(new Money[] { czk, eur, usd });
