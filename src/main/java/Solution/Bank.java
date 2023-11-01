@@ -6,9 +6,9 @@ import java.util.Map;
 
 public class Bank {
 
-    public static enum Currency {
+    public enum Currency {
         CZK, USD, EUR
-    };
+    }
 
     public static Map<Currency, Map<Currency, BigDecimal>> exchangeRates = new HashMap<>();
 

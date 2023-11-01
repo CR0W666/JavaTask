@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import Solution.Bank.Currency;
 
 public class Main {
-    public static void main(String args[]) {
+    public static void main(String[] args) {
 
         Money czk = new Money(BigDecimal.valueOf(2000), Currency.CZK);
         Money eur = new Money(BigDecimal.valueOf(100), Currency.EUR);

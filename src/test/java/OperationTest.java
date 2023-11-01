@@ -1,11 +1,8 @@
-package Tests;
-
 import Solution.Bank.Currency;
 import Solution.*;
 import org.junit.Test;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 
 import static org.junit.Assert.assertEquals;
 
@@ -32,12 +29,23 @@ public class OperationTest {
     }
 
     @Test
+    public void testAddSameCurrenciesEdge() {
+        Money money1 = new Money(new BigDecimal("0.1"), Currency.USD);
+        Money money2 = new Money(new BigDecimal("0.2"), Currency.USD);
+        Money result = Operation.add(money1, money2);
+
+        assertEquals(new BigDecimal("0.3"), result.getAmount());
+        assertEquals(Currency.USD, result.getCurrency());
+    }
+
+    @Test
     public void testSubtractDifferentCurrencies() {
         Money money1 = new Money(new BigDecimal("100"), Currency.USD);
-        Money money2 = new Money(new BigDecimal("85"), Currency.EUR);
+        Money money2USD = new Money(new BigDecimal("50"), Currency.USD);
+        Money money2 = money2USD.convertToCurrency(Currency.EUR);
         Money result = Operation.subtract(money1, money2);
 
-        assertEquals(new BigDecimal("7.5"), result.getAmount());
+        assertEquals(new BigDecimal("50"), result.getAmount());
         assertEquals(Currency.USD, result.getCurrency());
     }
 

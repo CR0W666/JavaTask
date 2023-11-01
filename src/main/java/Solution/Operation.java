@@ -40,6 +40,7 @@ public class Operation {
     }
 
     public static Money round(Money a) {
-        return new Money(a.getAmount().round(MathContext.DECIMAL64), a.getCurrency());
+        BigDecimal newValue = a.getAmount().setScale(0, RoundingMode.HALF_UP);
+        return new Money(newValue, a.getCurrency());
     }
 }

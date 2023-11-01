@@ -5,9 +5,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import Solution.Bank.Currency;
+import Solution.Money;
+import Solution.Operation;
 
 public class Wallet {
-    private Map<Currency, Money> moneyMap;
+    private final Map<Currency, Money> moneyMap;
 
     public Wallet() {
         moneyMap = new HashMap<>();
@@ -29,8 +31,9 @@ public class Wallet {
         if (moneyMap.containsKey(moneyCurrency)) {
             // If the currency already exists, add the new amount to the existing currency
             Money existingMoney = moneyMap.get(moneyCurrency);
-            moneyMap.replace(moneyCurrency, Operation.add(existingMoney, newMoney));
+            moneyMap.put(moneyCurrency, Operation.add(existingMoney, newMoney));
         } else {
+
             // If the currency doesn't exist, add a new entry
             moneyMap.put(moneyCurrency, newMoney);
         }
@@ -49,13 +52,17 @@ public class Wallet {
             Money newValue = Operation.subtract(existingMoney, newMoney);
 
             if (newValue.getAmount().compareTo(BigDecimal.ZERO) > 0) {
-                moneyMap.replace(moneyCurrency, newValue);
+                moneyMap.put(moneyCurrency, newValue);
             } else {
                 System.out.println("Insufficient funds in " + moneyCurrency);
             }
         } else {
             System.out.println("No funds available in " + moneyCurrency);
         }
+    }
+
+    public Money getCurrency(Currency currency) {
+        return moneyMap.containsKey(currency) ? moneyMap.get(currency) : new Money(new BigDecimal("0"), currency);
     }
 
     public Money getTotalInCurrency(Currency currency) {

@@ -1,12 +1,10 @@
-package Tests;
-
-import Solution.Bank;
-import Solution.Bank.Currency;
+import Solution.Bank.*;
 import org.junit.Test;
 
 import java.math.BigDecimal;
 import java.util.Map;
 
+import static Solution.Bank.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -14,16 +12,16 @@ public class BankTest {
 
     @Test
     public void testGetExchangeRates() {
-        Map<Currency, Map<Currency, BigDecimal>> exchangeRates = Bank.getExchangeRates();
+        Map<Currency, Map<Currency, BigDecimal>> exchangeRates = getExchangeRates();
         assertNotNull(exchangeRates);
         assertEquals(3, exchangeRates.size()); // Ensure there are rates for all three currencies
     }
 
     @Test
     public void testGetRateOf() {
-        Map<Currency, BigDecimal> czkRates = Bank.getRateOf(Currency.CZK);
-        Map<Currency, BigDecimal> eurRates = Bank.getRateOf(Currency.EUR);
-        Map<Currency, BigDecimal> usdRates = Bank.getRateOf(Currency.USD);
+        Map<Currency, BigDecimal> czkRates = getRateOf(Currency.CZK);
+        Map<Currency, BigDecimal> eurRates = getRateOf(Currency.EUR);
+        Map<Currency, BigDecimal> usdRates = getRateOf(Currency.USD);
 
         assertNotNull(czkRates);
         assertNotNull(eurRates);

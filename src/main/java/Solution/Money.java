@@ -1,7 +1,9 @@
 package Solution;
 
 import Solution.Bank.Currency;
+
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class Money {
 
@@ -37,7 +39,7 @@ public class Money {
         }
 
         BigDecimal sourceToTargetRate = Bank.getRateOf(currency).get(targetCurrency);
-        return new Money(amount.multiply(sourceToTargetRate), targetCurrency);
+        return new Money(amount.multiply(sourceToTargetRate).setScale(0, RoundingMode.HALF_UP), targetCurrency);
     }
 
     public int compareAmount(Money other) {
